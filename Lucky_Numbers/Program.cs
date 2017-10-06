@@ -49,10 +49,30 @@ namespace Lucky_Numbers
                     numGuesses[i] = numGuess;
                 }
             }
-            foreach (int num in numGuesses)
+            Console.WriteLine();
+
+            // Generates an array of (pseudo)random lucky numbers and prints
+            int[] luckyNumbers = new int[6];
+            Random rand = new Random();
+            for (int i = 0; i < luckyNumbers.Length; i++)
             {
-                Console.WriteLine(num);
+                luckyNumbers[i] = RandomNumGenerator(rand, lowerBound, upperBound);
             }
+
+            foreach (int num in luckyNumbers)
+            {
+                Console.WriteLine("Lucky Number: " +num);
+            }
+
+            //Compares arrays for guesses and lucky numbers,
+            //returns num guessed correctly
+
+            int numRight = ArrayCompare(numGuesses, luckyNumbers);
+            Console.WriteLine("You guessed " + numRight + " numbers correctly!");
+
+
+
+
 
 
 
@@ -63,6 +83,25 @@ namespace Lucky_Numbers
                 return true;
             else
                 return false;
+        }
+        public static int RandomNumGenerator(Random rand, int lowerBound, int upperBound)
+        {
+            return rand.Next(lowerBound, upperBound+1);
+        }
+        public static int ArrayCompare(int[] numGuesses, int[] luckyNumbers)
+        {
+            int numRight = 0;
+            foreach (int guess in numGuesses)
+            {
+                for (int i = 0; i < luckyNumbers.Length; i++)
+                    if (guess == luckyNumbers[i])
+                    {
+                        numRight++;
+                        luckyNumbers[i] = -1;
+                        break;
+                    }
+            }
+            return numRight;
         }
 
     }
