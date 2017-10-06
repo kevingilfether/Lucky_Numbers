@@ -13,7 +13,7 @@ namespace Lucky_Numbers
             //https://www.youtube.com/watch?v=5NV6Rdv1a3I
 
 
-            string playAgain = "";
+            string playAgain;
             do
             {
                 //Inital "copy" to introduce game and ask for bounds
@@ -60,7 +60,14 @@ namespace Lucky_Numbers
                 Random rand = new Random();
                 for (int i = 0; i < luckyNumbers.Length; i++)
                 {
-                    luckyNumbers[i] = RandomNumGenerator(rand, lowerBound, upperBound);
+                    int randNumAssignment = RandomNumGenerator(rand, lowerBound, upperBound);
+                    while (luckyNumbers.Contains(randNumAssignment))
+                    {
+                        randNumAssignment = RandomNumGenerator(rand, lowerBound, upperBound);
+                    }
+
+                    luckyNumbers[i] = randNumAssignment;
+
                 }
 
                 foreach (int num in luckyNumbers)
@@ -86,6 +93,8 @@ namespace Lucky_Numbers
 
             }
             while (playAgain == "Y" || playAgain == "YES");
+            if (playAgain == "N" || playAgain == "T")
+                Console.WriteLine("Thanks for playing!");
 
         }
         public static bool IsBetweenBounds(int num, int lowerBound, int upperBound)
@@ -97,7 +106,7 @@ namespace Lucky_Numbers
         }
         public static int RandomNumGenerator(Random rand, int lowerBound, int upperBound)
         {
-            return rand.Next(lowerBound, upperBound+1);
+            return rand.Next(lowerBound, upperBound + 1);
         }
         public static int ArrayCompare(int[] numGuesses, int[] luckyNumbers)
         {
