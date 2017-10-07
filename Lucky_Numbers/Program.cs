@@ -110,20 +110,15 @@ namespace Lucky_Numbers
         {
             return rand.Next(lowerBound, upperBound + 1);
         }
-
-        //Fix me to work with negative numbers by using .Contains()
         public static int ArrayCompare(int[] numGuesses, int[] luckyNumbers)
         {
             int numRight = 0;
             foreach (int guess in numGuesses)
             {
-                for (int i = 0; i < luckyNumbers.Length; i++)
-                    if (guess == luckyNumbers[i])
-                    {
-                        numRight++;
-                        //CHANGE ME                 luckyNumbers[i] = - 1
-                        break;
-                    }
+                if (luckyNumbers.Contains(guess))
+                {
+                    numRight++;
+                }
             }
             return numRight;
         }
