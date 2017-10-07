@@ -43,7 +43,7 @@ namespace Lucky_Numbers
                     }
                     else
                     {
-                        while (IsBetweenBounds(numGuess, lowerBound, upperBound) == false)
+                        while (!IsBetweenBounds(numGuess, lowerBound, upperBound))
                         {
                             Console.WriteLine();
                             Console.WriteLine("You must have made an error! That number is not between your bounds!");
@@ -55,16 +55,18 @@ namespace Lucky_Numbers
                 }
                 Console.WriteLine();
 
+     
                 // Generates an array of (pseudo)random lucky numbers and prints
                 int[] luckyNumbers = new int[6];
                 Random rand = new Random();
                 for (int i = 0; i < luckyNumbers.Length; i++)
                 {
-                    int randNumAssignment = RandomNumGenerator(rand, lowerBound, upperBound);
-                    while (luckyNumbers.Contains(randNumAssignment))
+                    int randNumAssignment;
+                    do
                     {
                         randNumAssignment = RandomNumGenerator(rand, lowerBound, upperBound);
                     }
+                    while (luckyNumbers.Contains(randNumAssignment));
 
                     luckyNumbers[i] = randNumAssignment;
 
@@ -93,7 +95,7 @@ namespace Lucky_Numbers
 
             }
             while (playAgain == "Y" || playAgain == "YES");
-            if (playAgain == "N" || playAgain == "T")
+            if (playAgain == "N" || playAgain == "NO")
                 Console.WriteLine("Thanks for playing!");
 
         }
@@ -108,6 +110,8 @@ namespace Lucky_Numbers
         {
             return rand.Next(lowerBound, upperBound + 1);
         }
+
+        //Fix me to work with negative numbers by using .Contains()
         public static int ArrayCompare(int[] numGuesses, int[] luckyNumbers)
         {
             int numRight = 0;
@@ -117,7 +121,7 @@ namespace Lucky_Numbers
                     if (guess == luckyNumbers[i])
                     {
                         numRight++;
-                        luckyNumbers[i] = -1;
+                        //CHANGE ME                 luckyNumbers[i] = - 1
                         break;
                     }
             }
