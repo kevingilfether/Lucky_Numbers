@@ -11,7 +11,7 @@ namespace Lucky_Numbers
         static void Main(string[] args)
         {
             //https://www.youtube.com/watch?v=5NV6Rdv1a3I
-
+            //Do-while loop for the game
 
             string playAgain;
             do
@@ -19,7 +19,7 @@ namespace Lucky_Numbers
                 //Inital "copy" to introduce game and ask for bounds
                 Console.WriteLine("Let's play \"Guess the Number\"");
                 Console.WriteLine("I'm going to generate six (pseudo)random numbers between two that you tell me.");
-                Console.WriteLine("If you guess all the numbers right, you will win 1200 ducats!");
+                Console.WriteLine("If you guess all the numbers right, you will win 1,000 ducats!");
                 Console.WriteLine();
 
                 Console.WriteLine("What's the lower bound of the numbers you want to generate?");
@@ -54,7 +54,6 @@ namespace Lucky_Numbers
                     }
                 }
                 Console.WriteLine();
-
      
                 // Generates an array of (pseudo)random lucky numbers and prints
                 int[] luckyNumbers = new int[6];
@@ -83,7 +82,7 @@ namespace Lucky_Numbers
 
                 int numRight = ArrayCompare(numGuesses, luckyNumbers);
                 Console.WriteLine("You guessed " + numRight + " numbers correctly!");
-                double winnings = WinningsCalculator(numRight);
+                string winnings = WinningsCalculator(numRight);
                 Console.WriteLine("You won " + winnings + " ducats!");
 
                 //Prompts user for play again
@@ -122,9 +121,10 @@ namespace Lucky_Numbers
             }
             return numRight;
         }
-        public static double WinningsCalculator(int numRight)
+        public static string WinningsCalculator(int numRight)
         {
-            double winnings = ((1200 / 6) * numRight); ;
+            double winningsCalc = ((1000d / 6d) * numRight);
+            string winnings = String.Format("{0:#,##0.00}", winningsCalc);
             return winnings;
         }
 
