@@ -24,9 +24,9 @@ namespace Lucky_Numbers
 
                 Console.WriteLine("What's the lower bound of the numbers you want to generate?");
 
-                int lowerBound = int.Parse(Console.ReadLine());
+                int lowerBound = int.Parse(Console.ReadLine().Trim());
                 Console.WriteLine("And how about the highest limit?");
-                int upperBound = int.Parse(Console.ReadLine());
+                int upperBound = int.Parse(Console.ReadLine().Trim());
 
 
                 //Loop populating guess array
@@ -36,20 +36,21 @@ namespace Lucky_Numbers
                     Console.WriteLine();
                     Console.WriteLine("Guess a number!");
 
-                    int numGuess = int.Parse(Console.ReadLine());
+                    int numGuess = int.Parse(Console.ReadLine().Trim());
                     if (IsBetweenBounds(numGuess, lowerBound, upperBound))
                     {
                         numGuesses[i] = numGuess;
                     }
                     else
                     {
-                        while (!IsBetweenBounds(numGuess, lowerBound, upperBound))
+                        do
                         {
                             Console.WriteLine();
-                            Console.WriteLine("You must have made an error! That number is not between your bounds!");
+                            Console.WriteLine("You must have made an error. That number is not between your bounds.");
                             Console.WriteLine("Guess again!");
-                            numGuess = int.Parse(Console.ReadLine());
+                            numGuess = int.Parse(Console.ReadLine().Trim());
                         }
+                        while (!IsBetweenBounds(numGuess, lowerBound, upperBound));
                         numGuesses[i] = numGuess;
                     }
                 }
@@ -81,8 +82,9 @@ namespace Lucky_Numbers
                 //returns num guessed correctly
 
                 int numRight = ArrayCompare(numGuesses, luckyNumbers);
-                Console.WriteLine("You guessed " + numRight + " numbers correctly!");
                 string winnings = WinningsCalculator(numRight);
+
+                Console.WriteLine("You guessed " + numRight + " numbers correctly!");
                 Console.WriteLine("You won " + winnings + " ducats!");
 
                 //Prompts user for play again
@@ -124,8 +126,8 @@ namespace Lucky_Numbers
         public static string WinningsCalculator(int numRight)
         {
             double winningsCalc = ((1000d / 6d) * numRight);
-            string winnings = String.Format("{0:#,##0.00}", winningsCalc);
-            return winnings;
+            string winningsString = String.Format("{0:#,##0.00}", winningsCalc);
+            return winningsString;
         }
 
     }
