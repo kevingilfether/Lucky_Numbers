@@ -29,6 +29,7 @@ namespace Lucky_Numbers
                 int upperBound = int.Parse(Console.ReadLine().Trim());
 
 
+
                 //Loop populating guess array
                 int[] numGuesses = new int[6];
                 for (int i = 0; i < numGuesses.Length; i++)
@@ -55,7 +56,7 @@ namespace Lucky_Numbers
                     }
                 }
                 Console.WriteLine();
-     
+
                 // Generates an array of (pseudo)random lucky numbers and prints
                 int[] luckyNumbers = new int[6];
                 Random rand = new Random();
@@ -126,7 +127,7 @@ namespace Lucky_Numbers
         public static string WinningsCalculator(int numRight)
         {
             double winningsCalc = ((1000d / 6d) * numRight);
-            string winningsString = String.Format("{0:#,##0.00}", winningsCalc);
+            string winningsString = String.Format("{0:#,##0.##}", winningsCalc);
             return winningsString;
         }
 
